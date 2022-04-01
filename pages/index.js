@@ -1,6 +1,5 @@
 const profileEditButton = document.querySelector('.profile__intro-edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
-const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.edit-popup');
 const popupAdd = document.querySelector('.add-popup');
 const zoomPopup = document.querySelector('.zoom-popup');
@@ -47,30 +46,30 @@ const elementsCardsContainer = document.querySelector('.elements__cards');
 const cards = document.querySelector('#cards').content;
 
 
-function closePopup() {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function openPopup() {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
 function editProfile() {
   nameInput.value = nameValue.textContent;
   jobInput.value = jobValue.textContent;
-  openPopup();
+  openPopup(popupEdit);
 }
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
   nameValue.textContent = nameInput.value;
   jobValue.textContent = jobInput.value;
-  closePopup();
+  closePopup(popupEdit);
 }
 
 const createPlaceCard = function (items) {
   const elementsCard = cards.querySelector('.elements__card').cloneNode(true);
-  const cardImage =  elementsCard.querySelector('.elements__card-image')
+  const cardImage =  elementsCard.querySelector('.elements__card-image');
   cardImage.src = items.link;
   cardImage.alt = items.name;
   elementsCard.querySelector('.elements__card-title').textContent = items.name;
@@ -85,7 +84,7 @@ const createPlaceCard = function (items) {
     zoomPopupCard.src = items.link;
     zoomPopupCard.alt = items.link;
     zoomPopupCardTitle.textContent = items.name;
-    openPopup ();
+    openPopup (zoomPopup);
   });
 
   return elementsCard;
@@ -97,7 +96,7 @@ const addCard = function (evt) {
   items.link = urlPlaceInput.value;
   items.name = namePlaceInput.value;
   addNewCards (items);
-  closePopup();
+  closePopup(popupAdd);
   formElementAdd.reset();
 };
 
@@ -114,10 +113,19 @@ const cardsList = places.map (function (items) {
 });
 
 elementsCardsContainer.append (...cardsList);
-buttonEditPopupClose.addEventListener('click', closePopup);
-buttonAddPopupClose.addEventListener('click', closePopup);
-zoomCloseButton.addEventListener('click', closePopup);
+buttonEditPopupClose.addEventListener('click', function () {
+  closePopup(popupEdit);
+});
+
+buttonAddPopupClose.addEventListener('click', function () {
+  closePopup(popupAdd);
+});
+zoomCloseButton.addEventListener('click', function () {
+  closePopup(zoomPopup);
+});
 profileEditButton.addEventListener('click', editProfile);
-profileAddButton.addEventListener('click', openPopup);
+profileAddButton.addEventListener('click', function () {
+  openPopup (popupAdd)
+});
 formElementEdit.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', addCard);
