@@ -125,7 +125,7 @@ zoomCloseButton.addEventListener('click', function () {
 });
 profileEditButton.addEventListener('click', editProfile);
 profileAddButton.addEventListener('click', function () {
-  openPopup (popupAdd)
+  openPopup (popupAdd);
 });
 formElementEdit.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', addCard);
