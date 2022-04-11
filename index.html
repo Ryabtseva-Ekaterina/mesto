@@ -44,7 +44,7 @@
     <section class="popup edit-popup">
         <div class="popup__container">
             <button class="popup__close-button edit-popup__close-button" type="button" aria-label="Закрыть"></button>
-            <form class="popup__container-form edit-popup__form" name="popup-form" novalidate>
+            <form class="popup__container-form edit-popup__form" name="edit" novalidate>
                 <h3 class="popup__container-form-title">Редактировать профиль</h3>
                     <input id="name-input" class="popup__container-form-input popup__container-form-input_type_name" type="text" name="name" minlength="2" maxlength="40" required>
                     <span class="name-input-error popup__container-form-input-text-error"></span>
@@ -57,17 +57,17 @@
 
 
     <section class="popup add-popup">
-        <div class="popup__container">
-            <button class="popup__close-button add-popup__close-button" type="button" aria-label="Закрыть"></button>
-            <form class="popup__container-form add-popup__form" name="popup-form" novalidate>
-                <h3 class="popup__container-form-title">Новое место</h3>
+          <div class="popup__container">
+                <button class="popup__close-button add-popup__close-button" type="button" aria-label="Закрыть"></button>
+                <form class="popup__container-form add-popup__form" name="add" novalidate>
+                    <h3 class="popup__container-form-title">Новое место</h3>
                     <input id="place-input" class="popup__container-form-input popup__container-form-input_type_name-place" type="text" name="name-place" placeholder="Название" minlength="2" maxlength="30" required>
                     <span class="place-input-error popup__container-form-input-text-error"></span>
                     <input id="url-input" class="popup__container-form-input popup__container-form-input_type_url" type="url" name="url" placeholder="Ссылка на картинку" required>
                     <span class="url-input-error popup__container-form-input-text-error"></span>
-                <button class="popup__container-form-button" type="submit">Создать</button>
-            </form>
-        </div>
+                    <button class="popup__container-form-button" type="submit">Создать</button>
+                </form>
+         </div>
     </section>
 
     <section class="popup zoom-popup">
@@ -80,9 +80,7 @@
 
     <template id="cards">
         <li class="elements__card">
-            <button class="elements__card-zoom-button" type="button" aria-label="зум">
-                <img class="elements__card-image" alt="user_place">
-            </button>
+            <img class="elements__card-image" alt="user_place">
             <h2 class="elements__card-title"></h2>
             <button class="elements__card-like" type="button" aria-label="Лайк"></button>
             <button class="elements__card-delete-button" type="button" aria-label="Корзина"></button>
@@ -90,5 +88,6 @@
     </template>
 
     <script src="pages/index.js"></script>
+    <script src="pages/validate.js"></script>
 </body>
 </html>

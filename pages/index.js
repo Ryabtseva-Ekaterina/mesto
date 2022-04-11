@@ -16,6 +16,7 @@ const nameValue = document.querySelector('.profile__intro-name');
 const jobValue = document.querySelector('.profile__intro-description');
 const zoomPopupCard = document.querySelector('.zoom-popup__card');
 const zoomPopupCardTitle = document.querySelector('.zoom-popup__card-title');
+const buttonElement = document.querySelector('.popup__container-form-button');
 const places = [
   {
     name: 'Севастополь',
@@ -46,17 +47,34 @@ const elementsCardsContainer = document.querySelector('.elements__cards');
 const cards = document.querySelector('#cards').content;
 
 
+const closeWithEsc = (evt) => {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popupOpened);
+  }
+}
+
+function closePopupOnOverlayClick (evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target);
+  }
+}
+
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener ('keyup', closeWithEsc);
 }
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener ('keyup', closeWithEsc);
 }
 
 function editProfile() {
   nameInput.value = nameValue.textContent;
   jobInput.value = jobValue.textContent;
+  buttonElement.classList.remove('popup__container-form-button_inactive');
+  buttonElement.disabled = false;
   openPopup(popupEdit);
 }
 
@@ -80,7 +98,7 @@ const createPlaceCard = function (items) {
     elementsCard.remove();
   });
 
-  elementsCard.querySelector('.elements__card-zoom-button').addEventListener ('click', function (){
+  elementsCard.querySelector('.elements__card-image').addEventListener ('click', function (){
     zoomPopupCard.src = items.link;
     zoomPopupCard.alt = items.link;
     zoomPopupCardTitle.textContent = items.name;
@@ -117,6 +135,7 @@ buttonEditPopupClose.addEventListener('click', function () {
   closePopup(popupEdit);
 });
 
+
 buttonAddPopupClose.addEventListener('click', function () {
   closePopup(popupAdd);
 });
@@ -129,69 +148,6 @@ profileAddButton.addEventListener('click', function () {
 });
 formElementEdit.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', addCard);
-
-
-
-
-
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add ('popup__container-form-input_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__container-form-input-text-error');
- }; 
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove ('popup__container-form-input_error');
-  errorElement.classList.remove('popup__container-form-input-text-error');
-  errorElement.textContent=" ";
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some ((inputElement) => {
-    return !inputElement.validity.valid;
-  })
-};
-
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput (inputList)) {
-    buttonElement.classList.add('popup__container-form-button_inactive');
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.classList.remove('popup__container-form-button_inactive');
-    buttonElement.disabled = false;
-  }
-};
-
-const isValid = (formElement, inputElement) => {
-  if(!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__container-form-input'));
-  const buttonElement = formElement.querySelector('.popup__container-form-button');
-  toggleButtonState(inputList, buttonElement); 
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener ('input', () => {
-      isValid(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__container-form'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener ('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
-
-enableValidation();
+popupAdd.addEventListener('click', closePopupOnOverlayClick);
+popupEdit.addEventListener('click', closePopupOnOverlayClick);
+zoomPopup.addEventListener('click', closePopupOnOverlayClick);
