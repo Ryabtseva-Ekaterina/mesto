@@ -44,10 +44,12 @@ const places = [
 ];
 const elementsCardsContainer = document.querySelector('.elements__cards');
 const cards = document.querySelector('#cards').content;
-const buttonElement = document.querySelector('.popup__container-form-button');
+const buttonAddSubmit = document.querySelector('.add-popup__submit-button');
+const buttonEditSubmit = document.querySelector ('.edit-popup__submit-button');
 const formElementList = {
-  inactiveButtonClass: 'popup__container-form-button_inactive'
+  inactiveButtonClass: 'popup__container-form-button_inactive',
 };
+
 
 const closeWithEsc = (evt) => {
   if (evt.key === 'Escape') {
@@ -75,7 +77,7 @@ function openPopup(popup) {
 function editProfile() {
   nameInput.value = nameValue.textContent;
   jobInput.value = jobValue.textContent;
-  activeButtonElement(buttonElement, formElementList);
+  activeButtonElement(buttonEditSubmit, formElementList);
   openPopup(popupEdit);
 }
 
@@ -117,7 +119,6 @@ const addCard = function (evt) {
   addNewCards (items);
   closePopup(popupAdd);
   formElementAdd.reset();
-  disableButtonElement(buttonElement, formElementList);
 };
 
 const likeCard = function(evt) {
@@ -148,11 +149,14 @@ profileEditButton.addEventListener('click', () => {
   editProfile();
 });
 
-profileAddButton.addEventListener('click', function () {
+profileAddButton.addEventListener('click', () => {
+  disableButtonElement( buttonAddSubmit, formElementList);
   openPopup (popupAdd);
 });
+
 formElementEdit.addEventListener('submit', editProfileForm);
 formElementAdd.addEventListener('submit', addCard);
+
 popupAdd.addEventListener('click', closePopupOnOverlayClick);
 popupEdit.addEventListener('click', closePopupOnOverlayClick);
 zoomPopup.addEventListener('click', closePopupOnOverlayClick);
