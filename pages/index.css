@@ -27,8 +27,7 @@
 @import url('../blocks/popup/__container-form-button/_inactive/popup__container-form-button_inactive.css');
 @import url('../blocks/popup/__container-form-input/popup__container-form-input.css');
 @import url('../blocks/popup/__container-form-input/_error/popup__container-form-input_error.css');
-@import url('../blocks/popup/__container-form-input-text/popup__container-form-input-text.css');
-@import url('../blocks/popup/__container-form-input-text/_error/popup__container-form-input-text_error.css');
+@import url('../blocks/popup/__container-form-input-text-error/popup__container-form-input-text-error.css');
 @import url('../blocks/popup/__container-form/popup__container-form.css');
 @import url('../blocks/popup/__container/popup__container.css');
 @import url('../blocks/popup/__conteiner-form-title/popup__conteiner-form-title.css');
