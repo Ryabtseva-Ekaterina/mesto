@@ -1,3 +1,6 @@
+import {disableButtonElement, activeButtonElement} from './FormValidator.js';
+import {Card} from './Cards.js';
+
 const profileEditButton = document.querySelector('.profile__intro-edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupEdit = document.querySelector('.edit-popup');
@@ -14,8 +17,6 @@ const namePlaceInput = document.querySelector('.popup__container-form-input_type
 const urlPlaceInput = document.querySelector('.popup__container-form-input_type_url');
 const nameValue = document.querySelector('.profile__intro-name');
 const jobValue = document.querySelector('.profile__intro-description');
-const zoomPopupCard = document.querySelector('.zoom-popup__card');
-const zoomPopupCardTitle = document.querySelector('.zoom-popup__card-title');
 const places = [
   {
     name: 'Севастополь',
@@ -50,6 +51,18 @@ const formElementList = {
   inactiveButtonClass: 'popup__container-form-button_inactive',
 };
 
+const addNewCards = function(items) {
+  const card = new Card (items.name, items.link);
+  const cardElement = card.generateCard();
+  elementsCardsContainer.prepend(cardElement);
+};
+
+places.forEach((item) => {
+  const card = new Card (item.name, item.link);
+  const cardElement = card.generateCard();
+  elementsCardsContainer.append (cardElement);
+});
+
 
 const closeWithEsc = (evt) => {
   if (evt.key === 'Escape') {
@@ -69,7 +82,7 @@ function closePopup(popup) {
   document.removeEventListener ('keyup', closeWithEsc);
 }
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener ('keyup', closeWithEsc);
 }
@@ -88,29 +101,6 @@ function editProfileForm(evt) {
   closePopup(popupEdit);
 }
 
-const createPlaceCard = function (items) {
-  const elementsCard = cards.querySelector('.elements__card').cloneNode(true);
-  const cardImage =  elementsCard.querySelector('.elements__card-image');
-  cardImage.src = items.link;
-  cardImage.alt = items.name;
-  elementsCard.querySelector('.elements__card-title').textContent = items.name;
-
-  elementsCard.querySelector('.elements__card-like').addEventListener ('click', likeCard);
-
-  elementsCard.querySelector('.elements__card-delete-button').addEventListener ('click', function (){
-    elementsCard.remove();
-  });
-
-  cardImage.addEventListener ('click', function (){
-    zoomPopupCard.src = items.link;
-    zoomPopupCard.alt = items.link;
-    zoomPopupCardTitle.textContent = items.name;
-    openPopup (zoomPopup);
-  });
-
-  return elementsCard;
-};
-
 const addCard = function (evt) {
   evt.preventDefault();
   const items = {};
@@ -118,22 +108,9 @@ const addCard = function (evt) {
   items.name = namePlaceInput.value;
   addNewCards (items);
   closePopup(popupAdd);
-  formElementAdd.reset();
 };
 
-const likeCard = function(evt) {
-  evt.target.classList.toggle('elements__card-like-active');
-};
 
-const addNewCards = function(items) {
-  elementsCardsContainer.prepend(createPlaceCard(items));
-};
-
-const cardsList = places.map (function (items) {
-  return createPlaceCard(items);
-});
-
-elementsCardsContainer.append (...cardsList);
 buttonEditPopupClose.addEventListener('click', function () {
   closePopup(popupEdit);
 });
@@ -151,6 +128,7 @@ profileEditButton.addEventListener('click', () => {
 
 profileAddButton.addEventListener('click', () => {
   disableButtonElement( buttonAddSubmit, formElementList);
+  formElementAdd.reset();
   openPopup (popupAdd);
 });
 

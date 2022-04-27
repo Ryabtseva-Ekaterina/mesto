@@ -18,12 +18,12 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const disableButtonElement = (buttonElement, obj) => {
+export const disableButtonElement = (buttonElement, obj) => {
   buttonElement.classList.add(obj.inactiveButtonClass);
   buttonElement.disabled = true;
 }
 
-const activeButtonElement = (buttonElement, obj) => {
+export const activeButtonElement = (buttonElement, obj) => {
   buttonElement.classList.remove(obj.inactiveButtonClass);
   buttonElement.disabled = false;
 }
