@@ -1,4 +1,4 @@
-import {disableButtonElement, activeButtonElement} from './FormValidator.js';
+import {FormValidator} from './FormValidator.js';
 import {Card} from './Cards.js';
 
 const profileEditButton = document.querySelector('.profile__intro-edit-button');
@@ -44,12 +44,13 @@ const places = [
   }
 ];
 const elementsCardsContainer = document.querySelector('.elements__cards');
-const cards = document.querySelector('#cards').content;
-const buttonAddSubmit = document.querySelector('.add-popup__submit-button');
-const buttonEditSubmit = document.querySelector ('.edit-popup__submit-button');
 const formElementList = {
+  input: '.popup__container-form-input',
+  submitButton: '.popup__container-form-button',
   inactiveButtonClass: 'popup__container-form-button_inactive',
-};
+  inputErrorClass: 'popup__container-form-input_error',
+  errorTextClass: 'popup__container-form-input-text-error'
+}
 
 const addNewCards = function(items) {
   const card = new Card (items.name, items.link);
@@ -90,7 +91,7 @@ export function openPopup(popup) {
 function editProfile() {
   nameInput.value = nameValue.textContent;
   jobInput.value = jobValue.textContent;
-  activeButtonElement(buttonEditSubmit, formElementList);
+  editProfileValidate.enableValidation(formElementList, formElementEdit);
   openPopup(popupEdit);
 }
 
@@ -110,7 +111,6 @@ const addCard = function (evt) {
   closePopup(popupAdd);
 };
 
-
 buttonEditPopupClose.addEventListener('click', function () {
   closePopup(popupEdit);
 });
@@ -127,8 +127,8 @@ profileEditButton.addEventListener('click', () => {
 });
 
 profileAddButton.addEventListener('click', () => {
-  disableButtonElement( buttonAddSubmit, formElementList);
   formElementAdd.reset();
+  editProfileValidate.enableValidation(formElementList, formElementAdd);
   openPopup (popupAdd);
 });
 
@@ -139,3 +139,8 @@ popupAdd.addEventListener('click', closePopupOnOverlayClick);
 popupEdit.addEventListener('click', closePopupOnOverlayClick);
 zoomPopup.addEventListener('click', closePopupOnOverlayClick);
 
+const editProfileValidate = new FormValidator (formElementList, formElementEdit);
+editProfileValidate.enableValidation(formElementList, formElementEdit);
+
+const addProfileValidate = new FormValidator (formElementList, formElementAdd);
+editProfileValidate.enableValidation(formElementList, formElementAdd);
