@@ -2,3 +2,10 @@
     top: 136px;
     left: 36px;
 }
+
+@media screen and (max-width: 540px) {
+    .popup__container-form-input-text-error_top {
+        top: 155px;
+        left: 25px;
+    }
+}

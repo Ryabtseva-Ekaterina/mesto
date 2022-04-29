@@ -52,16 +52,20 @@ const formElementList = {
   errorTextClass: 'popup__container-form-input-text-error'
 }
 
-const addNewCards = function(items) {
-  const card = new Card (items.name, items.link);
+const newCard = function creatNewCard (data) {
+  const card = new Card (data.name, data.link, '#cards');
   const cardElement = card.generateCard();
-  elementsCardsContainer.prepend(cardElement);
+  return cardElement;
+}
+
+const addNewCards = function(items) {
+  const cardPopupAdd = newCard (items);
+  elementsCardsContainer.prepend(cardPopupAdd);
 };
 
 places.forEach((item) => {
-  const card = new Card (item.name, item.link);
-  const cardElement = card.generateCard();
-  elementsCardsContainer.append (cardElement);
+  const carAd = newCard (item);
+  elementsCardsContainer.append (carAd );
 });
 
 
@@ -91,7 +95,7 @@ export function openPopup(popup) {
 function editProfile() {
   nameInput.value = nameValue.textContent;
   jobInput.value = jobValue.textContent;
-  editProfileValidate.enableValidation(formElementList, formElementEdit);
+  editProfileValidate.toggleButtonState();
   openPopup(popupEdit);
 }
 
@@ -128,7 +132,7 @@ profileEditButton.addEventListener('click', () => {
 
 profileAddButton.addEventListener('click', () => {
   formElementAdd.reset();
-  editProfileValidate.enableValidation(formElementList, formElementAdd);
+  addProfileValidate.toggleButtonState();
   openPopup (popupAdd);
 });
 
@@ -140,7 +144,7 @@ popupEdit.addEventListener('click', closePopupOnOverlayClick);
 zoomPopup.addEventListener('click', closePopupOnOverlayClick);
 
 const editProfileValidate = new FormValidator (formElementList, formElementEdit);
-editProfileValidate.enableValidation(formElementList, formElementEdit);
+editProfileValidate.enableValidation();
 
 const addProfileValidate = new FormValidator (formElementList, formElementAdd);
-editProfileValidate.enableValidation(formElementList, formElementAdd);
+addProfileValidate.enableValidation();
