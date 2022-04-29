@@ -52,20 +52,20 @@ const formElementList = {
   errorTextClass: 'popup__container-form-input-text-error'
 }
 
-const newCard = function creatNewCard (data) {
+const createNewCard = function creatNewCard (data) {
   const card = new Card (data.name, data.link, '#cards');
   const cardElement = card.generateCard();
   return cardElement;
 }
 
 const addNewCards = function(items) {
-  const cardPopupAdd = newCard (items);
-  elementsCardsContainer.prepend(cardPopupAdd);
+  const cardFromPopup = createNewCard (items);
+  elementsCardsContainer.prepend(cardFromPopup);
 };
 
 places.forEach((item) => {
-  const carAd = newCard (item);
-  elementsCardsContainer.append (carAd );
+  const cardFromArray = createNewCard (item);
+  elementsCardsContainer.append (cardFromArray);
 });
 
 
