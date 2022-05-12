@@ -1,9 +1,8 @@
-import { openPopup } from "./index.js";
-
 export class Card {
-    constructor (name, link, cardSelector) {
-        this._name = name;
-        this._link = link;
+    constructor ({data, handleCardClick}, cardSelector) {
+        this._name = data.name;
+        this._link = data.link;
+        this._handleCardClick = handleCardClick;
         this._cardSelector = cardSelector;
     } 
 
@@ -37,7 +36,7 @@ export class Card {
         });
 
         this._cardImage.addEventListener ('click', () => {
-            this._openZoomPopup();
+            this._handleCardClick(this._name, this._link);
         });
     }
 
@@ -48,12 +47,5 @@ export class Card {
     _deleteCard() {
         this._element.remove();
         this._element = null;
-    }
-
-    _openZoomPopup () {
-        document.querySelector('.zoom-popup__card').src = this._link;
-        document.querySelector('.zoom-popup__card').alt = this._name;
-        document.querySelector('.zoom-popup__card-title').textContent = this._name;
-        openPopup (document.querySelector('.zoom-popup'));
     }
 }
