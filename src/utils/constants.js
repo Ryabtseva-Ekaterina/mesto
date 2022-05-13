@@ -1,15 +1,13 @@
 export const profileEditButton = document.querySelector('.profile__intro-edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
-export const popup = document.querySelector('.popup');
-export const popupEdit = document.querySelector('.edit-popup');
-export const popupAdd = document.querySelector('.add-popup');
-export const zoomPopup = document.querySelector('.zoom-popup');
 export const formElementEdit = document.querySelector('.edit-popup__form');
 export const formElementAdd = document.querySelector('.add-popup__form');
 export const userInf = {
     nameValueSelector: '.profile__intro-name',
     jobValueSelector: '.profile__intro-description'
 }
+export const nameInput = document.querySelector('.popup__container-form-input_type_name');
+export const jobInput = document.querySelector('.popup__container-form-input_type_job');
 export const namePlaceInput = document.querySelector('.popup__container-form-input_type_name-place');
 export const urlPlaceInput = document.querySelector('.popup__container-form-input_type_url');
 export const places = [
@@ -38,7 +36,6 @@ export const places = [
     link: 'https://sun9-84.userapi.com/sun9-40/impf/30OqZrOa5x9U64_EARl8wpMje6hN2FMmj8JzeA/XBtWIQYdCQA.jpg?size=1280x960&quality=96&sign=174c8e3e147275ec257eaf51b9d06c8a&type=album'
   }
 ];
-export const elementsCardsContainer = document.querySelector('.elements__cards');
 export const formElementList = {
   input: '.popup__container-form-input',
   submitButton: '.popup__container-form-button',

@@ -8,21 +8,17 @@ import { UserInfo } from '../components/UserInfo.js';
 import {
   profileEditButton,
   profileAddButton,
-  popupEdit,
-  popupAdd,
-  zoomPopup,
   formElementEdit,
   formElementAdd,
-  namePlaceInput,
-  urlPlaceInput,
   places,
-  elementsCardsContainer,
   formElementList,
-  userInf
+  userInf,
+  nameInput,
+  jobInput
 } from '../utils/constants.js';
 
 
-const functionZoomPopup = new PopupWithImage (zoomPopup);
+const functionZoomPopup = new PopupWithImage ('.zoom-popup');
 functionZoomPopup.setEventListeners();
 
 const createNewCard = function creatNewCard (data) {
@@ -41,13 +37,15 @@ const creatCard = new Section ({
     const cardFromArray = createNewCard (item);
     creatCard.addItem(cardFromArray);
   }
-  }, elementsCardsContainer );
+  }, '.elements__cards');
 creatCard.renderItems();
 
 const createUserInfo = new UserInfo (userInf);
 
 function editProfile() {
-  createUserInfo.getUserInfo();
+  const profileData = createUserInfo.getUserInfo();
+  nameInput.value = profileData.username;
+  jobInput.value = profileData.job;
   editProfileValidate.toggleButtonState();
   popupWithFormEdit.open();
 }
@@ -58,14 +56,14 @@ const popupWithFormAdd = new PopupWithForm (
     creatCard.addItem(cardFromPopup);
     popupWithFormAdd.close();
   }
-}, popupAdd);
+}, '.add-popup');
 popupWithFormAdd.setEventListeners();
 
 const popupWithFormEdit = new PopupWithForm (
    {callbackSubmit: (data) => {
     createUserInfo.setUserInfo(data);
     popupWithFormEdit.close();
-   }}, popupEdit);
+   }}, '.edit-popup');
 popupWithFormEdit.setEventListeners();
 
 profileEditButton.addEventListener('click', () => {

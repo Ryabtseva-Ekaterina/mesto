@@ -1,8 +1,8 @@
 import {Popup} from './Popup.js';
 
 export class PopupWithImage extends Popup {
-    constructor (popup) {
-        super (popup);
+    constructor (popupSelector) {
+        super (popupSelector);
         this._image = this._popup.querySelector('.zoom-popup__card');
         this._imageName = this._popup.querySelector('.zoom-popup__card-title');
     }
