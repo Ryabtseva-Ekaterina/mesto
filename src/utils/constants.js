@@ -8,8 +8,6 @@ export const userInf = {
 }
 export const nameInput = document.querySelector('.popup__container-form-input_type_name');
 export const jobInput = document.querySelector('.popup__container-form-input_type_job');
-export const namePlaceInput = document.querySelector('.popup__container-form-input_type_name-place');
-export const urlPlaceInput = document.querySelector('.popup__container-form-input_type_url');
 export const places = [
   {
     cardname: 'Севастополь',
