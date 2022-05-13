@@ -2,7 +2,6 @@ import './index.css';
 import {FormValidator} from '../components/FormValidator.js';
 import {Card} from '../components/Card.js';
 import {Section} from '../components/Section.js';
-import {Popup} from '../components/Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
@@ -24,53 +23,40 @@ import {
 
 
 const functionZoomPopup = new PopupWithImage (zoomPopup);
-functionZoomPopup.closePopup(zoomPopup);
 functionZoomPopup.setEventListeners();
 
 const createNewCard = function creatNewCard (data) {
   const card = new Card ({data,
-    handleCardClick: (name, link) => {
-      functionZoomPopup.openPopup(name, link);
+    handleCardClick: (cardname, link) => {
+      functionZoomPopup.open(cardname, link);
     }
   },  '#cards');
   const cardElement = card.generateCard();
   return cardElement;
 }
 
-const creatCardFromArray = new Section ({
+const creatCard = new Section ({
   data: places,
   renderer: (item) => {
     const cardFromArray = createNewCard (item);
-    creatCardFromArray.addItem(cardFromArray);
+    creatCard.addItem(cardFromArray);
   }
   }, elementsCardsContainer );
-creatCardFromArray.renderItems();
-
-const functionPopupAdd = new Popup (popupAdd);
-functionPopupAdd.openPopup(popupAdd);
-functionPopupAdd.closePopup(popupAdd);
-functionPopupAdd.setEventListeners();
-
-const functionPopupEdit = new Popup (popupEdit);
-functionPopupEdit.openPopup(popupEdit);
-functionPopupEdit.closePopup(popupEdit);
-functionPopupEdit.setEventListeners();
+creatCard.renderItems();
 
 const createUserInfo = new UserInfo (userInf);
 
 function editProfile() {
   createUserInfo.getUserInfo();
   editProfileValidate.toggleButtonState();
-  functionPopupEdit.openPopup(popupEdit);
+  popupWithFormEdit.open();
 }
 
 const popupWithFormAdd = new PopupWithForm (
   { callbackSubmit: (data) => {
-    data.link = urlPlaceInput.value;
-    data.name = namePlaceInput.value;
     const cardFromPopup = createNewCard (data);
-    elementsCardsContainer.prepend(cardFromPopup);
-    functionPopupAdd.closePopup(popupAdd);
+    creatCard.addItem(cardFromPopup);
+    popupWithFormAdd.close();
   }
 }, popupAdd);
 popupWithFormAdd.setEventListeners();
@@ -78,7 +64,7 @@ popupWithFormAdd.setEventListeners();
 const popupWithFormEdit = new PopupWithForm (
    {callbackSubmit: (data) => {
     createUserInfo.setUserInfo(data);
-    functionPopupEdit.closePopup(popupEdit);
+    popupWithFormEdit.close();
    }}, popupEdit);
 popupWithFormEdit.setEventListeners();
 
@@ -87,9 +73,8 @@ profileEditButton.addEventListener('click', () => {
 });
 
 profileAddButton.addEventListener('click', () => {
-  popupWithFormAdd.closePopup();
   addProfileValidate.toggleButtonState();
-  functionPopupAdd.openPopup(popupAdd);
+  popupWithFormAdd.open();
 });
 
 
