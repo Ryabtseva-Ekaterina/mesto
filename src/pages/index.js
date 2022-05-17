@@ -46,7 +46,7 @@ function editProfile() {
   const profileData = createUserInfo.getUserInfo();
   nameInput.value = profileData.username;
   jobInput.value = profileData.job;
-  editProfileValidate.toggleButtonState();
+  editProfileValidate.resetValidation();
   popupWithFormEdit.open();
 }
 
@@ -71,7 +71,7 @@ profileEditButton.addEventListener('click', () => {
 });
 
 profileAddButton.addEventListener('click', () => {
-  addProfileValidate.toggleButtonState();
+  addProfileValidate.resetValidation();
   popupWithFormAdd.open();
 });
 
