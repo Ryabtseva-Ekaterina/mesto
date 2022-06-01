@@ -10,7 +10,6 @@ export const userInf = {
 export const nameInput = document.querySelector('.popup__container-form-input_type_name');
 export const jobInput = document.querySelector('.popup__container-form-input_type_job');
 export const profileAvatar = document.querySelector ('.profile__avatar-image');
-export let userId;
 export const formElementList = {
   input: '.popup__container-form-input',
   submitButton: '.popup__container-form-button',

@@ -16,10 +16,11 @@ import {
   userInf,
   nameInput,
   jobInput,
-  profileAvatar,
-  userId
+  profileAvatar
 } from '../utils/constants.js';
 import { PopupDeleteImage } from '../components/PopupDeleteImage';
+
+let userId;
 
 const createUserInfo = new UserInfo (userInf);
 
@@ -35,9 +36,7 @@ api.getProfileInfo()
   .then((userStats) => {
     createUserInfo.setUserInfo(userStats);
     profileAvatar.src = userStats.avatar;
-    console.log (userStats._id);
     userId = userStats._id;
-    console.log (userId);
 })
   .catch ((err) => {
     console.log (err);

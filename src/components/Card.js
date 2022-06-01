@@ -33,9 +33,6 @@ export class Card {
         this._likeCounter.textContent = this._likes.length;
 
         this._deleteCardButton = this._element.querySelector('.elements__card-delete-button')
-            console.log(this._userId);
-            console.log(this._owner._id);
-            //this._userId =! this._owner._id
              if ( this._userId === this._owner._id) {
                  this._deleteCardButton.classList.add ('elements__card-delete-button_visible');
             } else {
