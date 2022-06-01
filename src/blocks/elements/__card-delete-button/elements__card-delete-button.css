@@ -10,6 +10,8 @@
     position: absolute;
     top: 20px;
     right:20px;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .elements__card-delete-button:hover {

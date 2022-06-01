@@ -6,13 +6,13 @@ export class UserInfo {
         
     getUserInfo () {
         const data = {}
-        data.username = this._nameValue.textContent;
-        data.job = this._jobValue.textContent;
+        data.name = this._nameValue.textContent;
+        data.about = this._jobValue.textContent;
         return data;
     }
 
     setUserInfo (data) {
-        this._nameValue.textContent = data.username;
-        this._jobValue.textContent = data.job;
+        this._nameValue.textContent = data.name;
+        this._jobValue.textContent = data.about;
     }
 }

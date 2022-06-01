@@ -1,4 +1,4 @@
-.elements__card-like-active {
+.elements__card-like-button-active {
     width: 22px;
     height: 19px;
     justify-self: flex-end;
@@ -7,5 +7,4 @@
     background-color: transparent;
     transition: 0.2s linear;
     cursor: pointer;
-    margin-right: 20px;
 }
