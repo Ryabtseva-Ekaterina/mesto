@@ -1,28 +1,30 @@
-const handleResponse = (res) => {
-    if (res.ok) {
-        return res.json();
-      }
-    return Promise.reject(res.status);
-}
-
-
 export class Api {
     constructor (options){
         this._baseUrl = options.baseUrl;
         this._headers = options.headers;
     }
      
-    
+    handleResponse (res)  {
+        if (res.ok) {
+            return res.json();
+          }
+        return Promise.reject(res.status);
+    }
+
     getProfileInfo () {
         return fetch (`${this._baseUrl}/users/me`, { 
             headers: this._headers})
-        .then(handleResponse);
+        .then((res)=>
+            this.handleResponse (res)
+        );
     }
 
     getCards () {
         return fetch (`${this._baseUrl}/cards`, { 
             headers: this._headers})
-        .then(handleResponse);
+        .then((res)=>
+            this.handleResponse (res)
+        );
     }
     
     updateUserInfo (data) {
@@ -30,7 +32,9 @@ export class Api {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify(data)})
-        .then(handleResponse);
+        .then((res)=>
+            this.handleResponse (res)
+         );
     }
 
     createNewCard (data) {
@@ -38,7 +42,9 @@ export class Api {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify(data)})
-        .then(handleResponse);
+        .then((res)=>
+            this.handleResponse (res)
+        );
     }
 
     deleteCard (data, id) {
@@ -47,7 +53,9 @@ export class Api {
             method: 'DELETE',
             headers: this._headers,
             body: JSON.stringify(data)})
-        .then(handleResponse);
+        .then((res)=>
+            this.handleResponse (res)
+        );
     }
 
     updateUserAvatar (data) {
@@ -55,7 +63,9 @@ export class Api {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify(data)})
-        .then(handleResponse);
+        .then((res)=>
+            this.handleResponse (res)
+        );
     }
 
     likeCard (data, id) {
@@ -64,7 +74,9 @@ export class Api {
             method: 'PUT',
             headers: this._headers,
             body: JSON.stringify(data)})
-        .then(handleResponse);
+        .then((res)=>
+            this.handleResponse (res)
+        );
     }
 
     disLikeCard (data, id) {
@@ -73,6 +85,8 @@ export class Api {
             method: 'DELETE',
             headers: this._headers,
             body: JSON.stringify(data)})
-        .then(handleResponse);
+        .then((res)=>
+            this.handleResponse (res)
+        );
     }
 }

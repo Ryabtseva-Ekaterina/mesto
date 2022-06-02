@@ -5,11 +5,11 @@ export const formElementAdd = document.querySelector('.add-popup__form');
 export const formElementEditAvatar = document.querySelector('.edit-avatar-popup__form');
 export const userInf = {
     nameValueSelector: '.profile__intro-name',
-    jobValueSelector: '.profile__intro-description'
+    jobValueSelector: '.profile__intro-description',
+    avatarSelector: '.profile__avatar-image'
 }
 export const nameInput = document.querySelector('.popup__container-form-input_type_name');
 export const jobInput = document.querySelector('.popup__container-form-input_type_job');
-export const profileAvatar = document.querySelector ('.profile__avatar-image');
 export const formElementList = {
   input: '.popup__container-form-input',
   submitButton: '.popup__container-form-button',
